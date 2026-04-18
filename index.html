@@ -196,6 +196,12 @@
             background: #00ff9d;
             border-radius: 50%;
             box-shadow: 0 0 10px #00ff9d;
+            animation: pulseDot 1.5s infinite ease-in-out;
+        }
+
+        @keyframes pulseDot {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.35); opacity: 0.65; }
         }
 
         .hero {
@@ -216,7 +222,6 @@
         .hero h1 {
             font-size: 72px;
             font-weight: 900;
-            color: #fff;
             line-height: 1.05;
             margin-bottom: 24px;
         }
@@ -232,7 +237,7 @@
             margin-top: 45px;
             position: relative;
             width: 100%;
-            max-width: 980px;
+            max-width: 1100px;
             margin-left: auto;
             margin-right: auto;
         }
@@ -244,15 +249,15 @@
             transform: translate(-50%, -50%);
             width: 75%;
             height: 75%;
-            background: radial-gradient(circle, rgba(0, 123, 255, 0.20), transparent 70%);
-            filter: blur(55px);
+            background: radial-gradient(circle, rgba(0, 123, 255, 0.18), transparent 70%);
+            filter: blur(65px);
             animation: pulseGlow 4s infinite;
             z-index: 1;
         }
 
         @keyframes pulseGlow {
             0%, 100% {
-                opacity: 0.40;
+                opacity: 0.35;
                 transform: translate(-50%, -50%) scale(1);
             }
             50% {
@@ -261,83 +266,119 @@
             }
         }
 
-        .product-gallery {
+        .gallery-shell {
             position: relative;
             z-index: 2;
-            display: grid;
-            grid-template-columns: repeat(4, minmax(0, 1fr));
+            overflow: hidden;
+            padding: 14px 0;
+            mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+        }
+
+        .gallery-track {
+            display: flex;
             gap: 18px;
-            align-items: stretch;
-            justify-items: center;
+            width: max-content;
+            animation: autoScroll 26s linear infinite;
+        }
+
+        .gallery-shell:hover .gallery-track {
+            animation-play-state: paused;
+        }
+
+        @keyframes autoScroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(calc(-50% - 9px));
+            }
         }
 
         .product-card,
         .app-card {
-            width: 100%;
-            background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 22px;
-            padding: 12px;
-            backdrop-filter: blur(12px);
-            box-shadow:
-                0 20px 40px rgba(0,0,0,0.30),
-                0 0 0 1px rgba(255,255,255,0.02) inset;
             position: relative;
+            width: 240px;
+            padding: 12px;
+            border-radius: 24px;
             overflow: hidden;
-            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            box-shadow: 0 20px 45px rgba(0,0,0,0.30);
+            flex: 0 0 auto;
+            transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
         }
 
         .product-card::before,
         .app-card::before {
             content: "";
             position: absolute;
-            inset: -1px;
-            border-radius: 22px;
-            background: linear-gradient(135deg, rgba(0,123,255,0.35), rgba(0,255,200,0.12), rgba(255,0,100,0.20));
-            opacity: 0.55;
+            inset: -30%;
+            background:
+                conic-gradient(
+                    from 0deg,
+                    rgba(0,123,255,0.0),
+                    rgba(0,123,255,0.55),
+                    rgba(0,255,200,0.35),
+                    rgba(255,0,120,0.35),
+                    rgba(0,123,255,0.0)
+                );
+            animation: rotateGlow 5s linear infinite;
             filter: blur(18px);
+            opacity: 0.85;
             z-index: 0;
-            animation: liveBorder 4s linear infinite;
         }
 
-        @keyframes liveBorder {
-            0% { transform: rotate(0deg) scale(1.02); }
-            100% { transform: rotate(360deg) scale(1.02); }
+        @keyframes rotateGlow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         .product-card:hover,
         .app-card:hover {
-            transform: translateY(-6px);
-            border-color: rgba(0, 123, 255, 0.30);
-            box-shadow:
-                0 25px 50px rgba(0,0,0,0.36),
-                0 0 24px rgba(0,123,255,0.16);
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(0,123,255,0.30);
+            box-shadow: 0 28px 60px rgba(0,0,0,0.38), 0 0 28px rgba(0,123,255,0.14);
         }
 
         .card-inner {
             position: relative;
             z-index: 1;
-            background: rgba(7, 8, 18, 0.82);
-            border-radius: 16px;
+            background: rgba(8, 10, 22, 0.94);
+            border-radius: 18px;
             overflow: hidden;
+            padding: 10px;
         }
 
         .product-img {
             width: 100%;
-            height: 180px;
+            height: 190px;
             object-fit: contain;
             display: block;
-            animation: floatProduct 4s ease-in-out infinite;
             background: #10131d;
+            border-radius: 14px;
+            animation: floatProduct 4s ease-in-out infinite;
         }
 
-        .product-card:nth-child(2) .product-img { animation-delay: 0.4s; }
-        .product-card:nth-child(3) .product-img { animation-delay: 0.8s; }
-        .product-card:nth-child(4) .product-img { animation-delay: 1.2s; }
+        .product-card:nth-child(2) .product-img { animation-delay: 0.3s; }
+        .product-card:nth-child(3) .product-img { animation-delay: 0.6s; }
+        .product-card:nth-child(4) .product-img { animation-delay: 0.9s; }
+        .product-card:nth-child(5) .product-img { animation-delay: 1.2s; }
+        .product-card:nth-child(6) .product-img { animation-delay: 1.5s; }
+        .product-card:nth-child(7) .product-img { animation-delay: 1.8s; }
+        .product-card:nth-child(8) .product-img { animation-delay: 2.1s; }
 
         @keyframes floatProduct {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
+        }
+
+        .card-label {
+            margin-top: 10px;
+            text-align: center;
+            color: #d8d8d8;
+            font-size: 13px;
+            letter-spacing: 0.5px;
         }
 
         .trust-section {
@@ -459,6 +500,7 @@
             max-width: 920px;
             margin: 0 auto;
             padding: 14px;
+            width: 100%;
         }
 
         .app-image {
@@ -513,24 +555,6 @@
             border-top: 1px solid #111;
         }
 
-        @media (max-width: 992px) {
-            .hero-visual {
-                max-width: 760px;
-            }
-
-            .product-gallery {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
-
-            .product-card {
-                max-width: 260px;
-            }
-
-            .product-img {
-                height: 190px;
-            }
-        }
-
         @media (max-width: 768px) {
             .hero {
                 padding: 135px 0 60px;
@@ -543,6 +567,7 @@
             .hero-subtext {
                 font-size: 16px;
                 margin-bottom: 28px;
+                padding: 0 8px;
             }
 
             .header-content {
@@ -566,32 +591,33 @@
             }
 
             .hero-visual {
-                max-width: 420px;
+                max-width: 100%;
                 margin-top: 32px;
             }
 
-            .product-gallery {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
+            .gallery-track {
                 gap: 12px;
+                animation-duration: 18s;
             }
 
             .product-card {
-                max-width: 180px;
-                padding: 10px;
-                border-radius: 16px;
-            }
-
-            .product-card::before,
-            .app-card::before {
-                border-radius: 16px;
+                width: 170px;
+                padding: 9px;
+                border-radius: 18px;
             }
 
             .card-inner {
-                border-radius: 12px;
+                border-radius: 14px;
+                padding: 8px;
             }
 
             .product-img {
-                height: 135px;
+                height: 120px;
+                border-radius: 10px;
+            }
+
+            .card-label {
+                font-size: 12px;
             }
 
             .content-box {
@@ -625,6 +651,7 @@
 
             .app-card {
                 padding: 10px;
+                border-radius: 18px;
             }
 
             .app-image {
@@ -642,22 +669,16 @@
                 letter-spacing: 3px;
             }
 
-            .hero-visual {
-                max-width: 360px;
-            }
-
-            .product-gallery {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-                gap: 10px;
-            }
-
             .product-card {
-                max-width: 150px;
-                padding: 8px;
+                width: 145px;
             }
 
             .product-img {
-                height: 110px;
+                height: 102px;
+            }
+
+            .gallery-track {
+                animation-duration: 16s;
             }
         }
     </style>
@@ -697,28 +718,62 @@
             <div class="hero-visual">
                 <div class="visual-glow"></div>
 
-                <div class="product-gallery">
-                    <div class="product-card">
-                        <div class="card-inner">
-                            <img src="drone-photo.jpg.png" class="product-img" alt="Product 1">
+                <div class="gallery-shell">
+                    <div class="gallery-track">
+                        <div class="product-card">
+                            <div class="card-inner">
+                                <img src="drone-photo.jpg.png" class="product-img" alt="Optical Module Front">
+                                <div class="card-label">Optical Module Front</div>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="product-card">
-                        <div class="card-inner">
-                            <img src="image2.jpg.png" class="product-img" alt="Product 2">
+                        <div class="product-card">
+                            <div class="card-inner">
+                                <img src="image2.jpg.png" class="product-img" alt="Optical Module Detail">
+                                <div class="card-label">Optical Module Detail</div>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="product-card">
-                        <div class="card-inner">
-                            <img src="Picture3.png" class="product-img" alt="Product 3">
+                        <div class="product-card">
+                            <div class="card-inner">
+                                <img src="Picture3.png" class="product-img" alt="Connector Interface">
+                                <div class="card-label">Connector Interface</div>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="product-card">
-                        <div class="card-inner">
-                            <img src="Picture4.png" class="product-img" alt="Product 4">
+                        <div class="product-card">
+                            <div class="card-inner">
+                                <img src="Picture4.png" class="product-img" alt="Indicator Layout">
+                                <div class="card-label">Indicator Layout</div>
+                            </div>
+                        </div>
+
+                        <div class="product-card">
+                            <div class="card-inner">
+                                <img src="drone-photo.jpg.png" class="product-img" alt="Optical Module Front Copy">
+                                <div class="card-label">Optical Module Front</div>
+                            </div>
+                        </div>
+
+                        <div class="product-card">
+                            <div class="card-inner">
+                                <img src="image2.jpg.png" class="product-img" alt="Optical Module Detail Copy">
+                                <div class="card-label">Optical Module Detail</div>
+                            </div>
+                        </div>
+
+                        <div class="product-card">
+                            <div class="card-inner">
+                                <img src="Picture3.png" class="product-img" alt="Connector Interface Copy">
+                                <div class="card-label">Connector Interface</div>
+                            </div>
+                        </div>
+
+                        <div class="product-card">
+                            <div class="card-inner">
+                                <img src="Picture4.png" class="product-img" alt="Indicator Layout Copy">
+                                <div class="card-label">Indicator Layout</div>
+                            </div>
                         </div>
                     </div>
                 </div>
