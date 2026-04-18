@@ -4,12 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AeroLink Systems | Direct Factory Partner</title>
-    <!-- Professional Fonts -->
+
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
     <style>
-        /* ----- ULTRA PREMIUM DYNAMIC THEME ----- */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: #000000;
@@ -18,37 +26,58 @@
             overflow-x: hidden;
         }
 
-        /* ANIMATED VISUALIZATION BACKGROUND */
         .bg-visual {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
             background: radial-gradient(circle at 50% 50%, #050510 0%, #000000 100%);
         }
-        /* Mesh Gradient Animation */
+
         .gradient-mesh {
-            position: absolute; width: 200%; height: 200%; top: -50%; left: -50%;
-            background: 
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background:
                 radial-gradient(circle at 20% 30%, rgba(0, 123, 255, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 80% 70%, rgba(255, 0, 60, 0.1) 0%, transparent 40%),
-                radial-gradient(circle at 40% 80%, rgba(0, 243, 255, 0.1) 0%, transparent 30%);
+                radial-gradient(circle at 80% 70%, rgba(255, 0, 60, 0.10) 0%, transparent 40%),
+                radial-gradient(circle at 40% 80%, rgba(0, 243, 255, 0.10) 0%, transparent 30%);
             animation: meshRotate 30s linear infinite;
         }
-        @keyframes meshRotate { 
-            from { transform: rotate(0deg); } 
-            to { transform: rotate(360deg); } 
+
+        @keyframes meshRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
-        /* Noise Texture Overlay for Premium Feel */
         .noise {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
             pointer-events: none;
         }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
 
-        /* ----- DYNAMIC HEADING STYLE ----- */
-        h1, h2, h3 { font-family: 'Orbitron', sans-serif; letter-spacing: 1px; }
-        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+        }
+
         .gradient-heading {
             background: linear-gradient(90deg, #ffffff, #007BFF, #ff003c, #ffffff);
             background-size: 300% auto;
@@ -57,225 +86,530 @@
             animation: textShine 5s linear infinite;
             display: inline-block;
         }
-        @keyframes textShine { to { background-position: 200% center; } }
 
-        /* ----- BUTTONS ----- */
+        @keyframes textShine {
+            to { background-position: 200% center; }
+        }
+
         .btn {
-            padding: 18px 40px; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 15px;
-            border-radius: 50px; border: none; cursor: pointer; text-decoration: none;
-            transition: 0.3s ease; display: inline-block; text-align: center;
-            background: rgba(255, 255, 255, 0.05); color: #fff; border: 1px solid rgba(255, 255, 255, 0.15);
-            position: relative; overflow: hidden;
+            padding: 16px 34px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 15px;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            transition: 0.3s ease;
+            display: inline-block;
+            text-align: center;
         }
-        .btn::after {
-            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
-            transform: rotate(45deg); transition: 0.5s; opacity: 0;
+
+        .btn-cta {
+            background: #007BFF;
+            color: #fff;
+            box-shadow: 0 0 20px rgba(0, 123, 255, 0.3);
         }
-        .btn:hover::after { opacity: 1; left: 100%; }
-        .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); background: #fff; color: #000; }
 
-        .btn-cta { background: #007BFF; color: #fff; border: none; box-shadow: 0 0 20px rgba(0, 123, 255, 0.3); }
-        .btn-cta:hover { background: #fff; color: #007BFF; box-shadow: 0 0 30px rgba(0, 123, 255, 0.5); }
-        
-        .btn-whatsapp { background: #25D366; color: #fff; border: none; }
-        .btn-whatsapp:hover { background: #fff; color: #25D366; }
-        
-        .btn-email { background: transparent; border: 1px solid #fff; color: #fff; }
-        .btn-email:hover { background: #fff; color: #000; }
+        .btn-cta:hover {
+            background: #fff;
+            color: #007BFF;
+        }
 
-        /* ----- HEADER ----- */
-        header { padding: 20px 0; position: fixed; width: 100%; top: 0; z-index: 1000; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
-        .header-content { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-family: 'Orbitron', sans-serif; font-size: 24px; font-weight: 700; color: #fff; text-decoration: none; letter-spacing: 3px; }
-        .logo span { color: #007BFF; }
+        .btn-email {
+            background: transparent;
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.25);
+        }
 
-        /* SYSTEM ONLINE BADGE */
+        .btn-email:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        .btn-whatsapp {
+            background: #25D366;
+            color: #fff;
+        }
+
+        .btn-whatsapp:hover {
+            background: #fff;
+            color: #25D366;
+        }
+
+        header {
+            padding: 18px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.72);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #fff;
+            text-decoration: none;
+            letter-spacing: 3px;
+        }
+
+        .logo span {
+            color: #007BFF;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
         .status-badge {
-            font-size: 10px; color: #00ff9d; background: rgba(0, 255, 157, 0.05);
-            padding: 8px 20px; border: 1px solid rgba(0, 255, 157, 0.2); border-radius: 30px;
-            font-family: 'Orbitron'; letter-spacing: 2px; text-transform: uppercase;
-            display: flex; align-items: center; gap: 8px;
-            animation: float-status 3s ease-in-out infinite;
-            box-shadow: 0 0 20px rgba(0, 255, 157, 0.1);
+            font-size: 10px;
+            color: #00ff9d;
+            background: rgba(0, 255, 157, 0.05);
+            padding: 8px 18px;
+            border: 1px solid rgba(0, 255, 157, 0.22);
+            border-radius: 30px;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 0 20px rgba(0, 255, 157, 0.08);
         }
-        .dot { width: 6px; height: 6px; background: #00ff9d; border-radius: 50%; box-shadow: 0 0 10px #00ff9d; }
-        @keyframes float-status { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
 
-        /* ----- HERO SECTION ----- */
-        .hero { padding: 180px 0 100px; text-align: center; position: relative; }
-        
-        .hero-tag { color: #888; font-size: 13px; letter-spacing: 4px; margin-bottom: 20px; text-transform: uppercase; font-weight: 600; }
-        .hero h1 { font-size: 72px; font-weight: 900; color: #fff; line-height: 1.1; margin-bottom: 30px; }
-        
-        /* Product Visual */
-        /* Product Visual */
-.hero-visual {
-    margin-top: 45px;
-    position: relative;
-    width: 100%;
-    max-width: 760px;
-    margin-left: auto;
-    margin-right: auto;
-}
+        .dot {
+            width: 6px;
+            height: 6px;
+            background: #00ff9d;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #00ff9d;
+        }
 
-.visual-glow {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 70%;
-    height: 70%;
-    background: radial-gradient(circle, rgba(0, 123, 255, 0.22), transparent 70%);
-    filter: blur(45px);
-    animation: pulseGlow 4s infinite;
-    z-index: 1;
-}
+        .hero {
+            padding: 170px 0 90px;
+            text-align: center;
+            position: relative;
+        }
 
-@keyframes pulseGlow {
-    0%, 100% { opacity: 0.40; transform: translate(-50%, -50%) scale(1); }
-    50% { opacity: 0.65; transform: translate(-50%, -50%) scale(1.08); }
-}
+        .hero-tag {
+            color: #8a8a8a;
+            font-size: 13px;
+            letter-spacing: 4px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
 
-.product-gallery {
-    position: relative;
-    z-index: 2;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 18px;
-    align-items: center;
-    justify-items: center;
-}
+        .hero h1 {
+            font-size: 72px;
+            font-weight: 900;
+            color: #fff;
+            line-height: 1.05;
+            margin-bottom: 24px;
+        }
 
-.product-card {
-    width: 100%;
-    max-width: 290px;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 22px;
-    padding: 14px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.30);
-}
+        .hero-subtext {
+            font-size: 18px;
+            color: #aaaaaa;
+            max-width: 700px;
+            margin: 0 auto 34px;
+        }
 
-.product-img {
-    width: 100%;
-    height: 230px;
-    object-fit: contain;
-    display: block;
-    border-radius: 16px;
-    animation: floatProduct 4s ease-in-out infinite;
-}
+        .hero-visual {
+            margin-top: 45px;
+            position: relative;
+            width: 100%;
+            max-width: 760px;
+            margin-left: auto;
+            margin-right: auto;
+        }
 
-.product-card:nth-child(2) .product-img {
-    animation-delay: 0.6s;
-}
+        .visual-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 72%;
+            height: 72%;
+            background: radial-gradient(circle, rgba(0, 123, 255, 0.22), transparent 70%);
+            filter: blur(45px);
+            animation: pulseGlow 4s infinite;
+            z-index: 1;
+        }
 
-@keyframes floatProduct {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-}
+        @keyframes pulseGlow {
+            0%, 100% {
+                opacity: 0.40;
+                transform: translate(-50%, -50%) scale(1);
+            }
+            50% {
+                opacity: 0.65;
+                transform: translate(-50%, -50%) scale(1.08);
+            }
+        }
 
-        /* ----- TRUST SECTION (Professional & Content Focused) ----- */
-        .trust-section { padding: 100px 0; position: relative; }
-        
+        .product-gallery {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+            align-items: stretch;
+            justify-items: center;
+        }
+
+        .product-card {
+            width: 100%;
+            max-width: 290px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 22px;
+            padding: 14px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.30);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 230px;
+            object-fit: contain;
+            display: block;
+            border-radius: 16px;
+            animation: floatProduct 4s ease-in-out infinite;
+        }
+
+        .product-card:nth-child(2) .product-img {
+            animation-delay: 0.6s;
+        }
+
+        @keyframes floatProduct {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .trust-section {
+            padding: 90px 0;
+        }
+
         .content-box {
-            background: rgba(10, 10, 10, 0.6); backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 30px; padding: 60px;
+            background: rgba(10, 10, 10, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 30px;
+            padding: 60px;
             box-shadow: 0 30px 60px rgba(0,0,0,0.2);
         }
 
-        .section-title { font-size: 36px; color: #fff; margin-bottom: 30px; font-weight: 700; letter-spacing: -1px; }
-        .trust-text { font-size: 18px; color: #ccc; margin-bottom: 50px; max-width: 800px; margin-left: auto; margin-right: auto; }
-        .highlight { color: #007BFF; font-weight: 700; }
-
-        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
-        .f-card { padding: 35px; background: rgba(0,0,0,0.4); border-radius: 20px; border: 1px solid rgba(255,255,255,0.05); transition: 0.3s; text-align: center; }
-        .f-card:hover { border-color: rgba(0, 123, 255, 0.3); transform: translateY(-5px); background: rgba(0, 123, 255, 0.05); }
-        .f-card h4 { font-family: 'Orbitron'; font-size: 16px; color: #fff; margin-bottom: 15px; letter-spacing: 1px; }
-        .f-card p { font-size: 15px; color: #888; line-height: 1.6; }
-
-        /* ----- SPECS GRID ----- */
-        .specs-section { padding: 80px 0; background: rgba(0,0,0,0.5); }
-        
-        .specs-container { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
-        .spec-item { 
-            flex: 1 1 200px; background: #0a0a0a; padding: 25px; border-radius: 15px; 
-            border: 1px solid #111; text-align: center;
+        .section-title {
+            font-size: 36px;
+            color: #fff;
+            margin-bottom: 24px;
+            font-weight: 700;
+            letter-spacing: -1px;
+            text-align: center;
         }
-        .spec-item h5 { color: #007BFF; font-family: 'Orbitron'; font-size: 28px; margin-bottom: 5px; font-weight: 700; }
-        .spec-item p { color: #666; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* ----- CONTACT SECTION ----- */
-        #contact { padding: 100px 0; text-align: center; }
-        .contact-box { max-width: 600px; margin: 0 auto; }
-        .contact-title { font-size: 48px; margin-bottom: 20px; color: #fff; }
-        .btn-group { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 30px; }
+        .trust-text {
+            font-size: 18px;
+            color: #cccccc;
+            margin-bottom: 46px;
+            max-width: 840px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
 
-        footer { padding: 30px 0; text-align: center; color: #444; font-size: 12px; letter-spacing: 1px; border-top: 1px solid #111; }
+        .highlight {
+            color: #007BFF;
+            font-weight: 700;
+        }
 
-        /* ----- RESPONSIVE MOBILE VIEW ----- */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+        }
+
+        .f-card {
+            padding: 32px;
+            background: rgba(0,0,0,0.4);
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        .f-card:hover {
+            border-color: rgba(0, 123, 255, 0.3);
+            transform: translateY(-5px);
+            background: rgba(0, 123, 255, 0.05);
+        }
+
+        .f-card h4 {
+            font-size: 16px;
+            color: #fff;
+            margin-bottom: 14px;
+            letter-spacing: 1px;
+        }
+
+        .f-card p {
+            font-size: 15px;
+            color: #9a9a9a;
+            line-height: 1.6;
+        }
+
+        .specs-section {
+            padding: 80px 0;
+            background: rgba(0,0,0,0.42);
+        }
+
+        .specs-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .spec-item {
+            flex: 1 1 200px;
+            background: #0a0a0a;
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid #111;
+            text-align: center;
+        }
+
+        .spec-item h5 {
+            color: #007BFF;
+            font-size: 28px;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .spec-item p {
+            color: #666;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        #contact {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .contact-box {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .contact-title {
+            font-size: 46px;
+            margin-bottom: 16px;
+            color: #fff;
+        }
+
+        .contact-sub {
+            color: #888;
+            margin-bottom: 8px;
+        }
+
+        .contact-sub-small {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        footer {
+            padding: 30px 0;
+            text-align: center;
+            color: #444;
+            font-size: 12px;
+            letter-spacing: 1px;
+            border-top: 1px solid #111;
+        }
+
         @media (max-width: 768px) {
-            .hero { padding: 140px 0 60px; }
-            .hero h1 { font-size: 42px; }
-            .content-box { padding: 40px 25px; }
-            .section-title { font-size: 28px; }
-            .trust-text { font-size: 16px; text-align: justify; }
-            .f-card { padding: 25px; }
-            .btn { padding: 15px 30px; font-size: 14px; width: 100%; display: block; } /* Full width buttons on mobile */
-            .btn-group { flex-direction: column; }
-            .contact-title { font-size: 32px; }
-            .header-content { padding: 0 10px; }
-            .status-badge { font-size: 8px; padding: 6px 12px; }
+            .hero {
+                padding: 135px 0 60px;
+            }
+
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .hero-subtext {
+                font-size: 16px;
+                margin-bottom: 28px;
+            }
+
+            .header-content {
+                padding: 0 4px;
+            }
+
+            .logo {
+                font-size: 18px;
+                letter-spacing: 2px;
+            }
+
+            .status-badge {
+                font-size: 8px;
+                padding: 6px 10px;
+                letter-spacing: 1px;
+            }
+
+            .btn-cta.header-btn {
+                padding: 9px 14px;
+                font-size: 11px;
+            }
+
+            .hero-visual {
+                max-width: 420px;
+                margin-top: 32px;
+            }
+
+            .product-gallery {
+                gap: 12px;
+            }
+
+            .product-card {
+                max-width: 180px;
+                padding: 10px;
+                border-radius: 16px;
+            }
+
+            .product-img {
+                height: 140px;
+                border-radius: 12px;
+            }
+
+            .content-box {
+                padding: 36px 22px;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .trust-text {
+                font-size: 16px;
+            }
+
+            .contact-title {
+                font-size: 32px;
+            }
+
+            .btn {
+                width: 100%;
+                display: block;
+            }
+
+            .btn-group {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero-tag {
+                font-size: 11px;
+                letter-spacing: 3px;
+            }
+
+            .product-gallery {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 10px;
+            }
+
+            .product-card {
+                max-width: 150px;
+                padding: 8px;
+            }
+
+            .product-img {
+                height: 115px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- LIVE BACKGROUND -->
     <div class="bg-visual">
         <div class="gradient-mesh"></div>
     </div>
     <div class="noise"></div>
 
-    <!-- HEADER -->
     <header>
         <div class="container header-content">
             <a href="#" class="logo">AERO<span>LINK</span></a>
-            <div style="display: flex; align-items: center; gap: 15px;">
+
+            <div class="header-right">
                 <div class="status-badge">
                     <span class="dot"></span> System Online
                 </div>
-                <a href="#contact" class="btn btn-cta" style="padding: 10px 20px; font-size: 12px;">Contact</a>
+                <a href="#contact" class="btn btn-cta header-btn">Contact</a>
             </div>
         </div>
     </header>
 
-    <!-- HERO SECTION -->
     <section class="hero">
         <div class="container">
             <div class="hero-tag">PROFESSIONAL UAV COMPONENTS</div>
+
             <h1>
                 <span class="gradient-heading">FPV OPTICAL<br>TRANSMISSION</span>
             </h1>
-            <p style="font-size: 18px; color: #aaa; max-width: 600px; margin: 0 auto 40px;">
+
+            <p class="hero-subtext">
                 Direct from China Factory. Professional grade hardware for industrial drone applications.
             </p>
 
             <div class="hero-visual">
                 <div class="visual-glow"></div>
-                <!-- Replace with your image -->
-                <img src="https://via.placeholder.com/700x400?text=Product+Preview" class="product-img" alt="Product">
+
+                <div class="product-gallery">
+                    <div class="product-card">
+                        <img src="drone-photo.jpg.png" class="product-img" alt="Product 1">
+                    </div>
+
+                    <div class="product-card">
+                        <img src="image2.jpg.png" class="product-img" alt="Product 2">
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- TRUST SECTION (Professional Highlight) -->
     <section class="trust-section">
         <div class="container">
             <div class="content-box">
-                <h2 class="section-title" style="text-align: center;">YOUR <span class="highlight">TRUSTED</span> PARTNER</h2>
-                <p class="trust-text" style="text-align: center;">
+                <h2 class="section-title">YOUR <span class="highlight">TRUSTED</span> PARTNER</h2>
+
+                <p class="trust-text">
                     We have been working in the drone market for a long time. We do not just supply products; we connect you directly with the <span class="highlight">source</span>. We work directly with the factory in China, ensuring authentic quality, factory pricing, and reliable support for your business.
                 </p>
 
@@ -284,36 +618,41 @@
                         <h4>LONG MARKET EXPERIENCE</h4>
                         <p>Years of presence in the industry ensures we understand your technical needs better than anyone.</p>
                     </div>
+
                     <div class="f-card">
                         <h4>DIRECT CHINA FACTORY</h4>
                         <p>No middlemen. We deal directly with the manufacturing facilities to ensure genuine products.</p>
                     </div>
+
                     <div class="f-card">
                         <h4>PROFESSIONAL USAGE</h4>
-                        <p>Ideal for companies requiring stable, long-range transmission for industrial & commercial operations.</p>
+                        <p>Ideal for companies requiring stable, long-range transmission for industrial and commercial operations.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SPECS SECTION -->
     <section class="specs-section">
         <div class="container">
-            <h2 class="section-title" style="text-align: center; margin-bottom: 50px;">SYSTEM <span class="highlight">SPECS</span></h2>
+            <h2 class="section-title">SYSTEM <span class="highlight">SPECS</span></h2>
+
             <div class="specs-container">
                 <div class="spec-item">
                     <h5>100<span style="font-size: 14px;">KM</span></h5>
                     <p>Max Range</p>
                 </div>
+
                 <div class="spec-item">
                     <h5>12<span style="font-size: 14px;">g</span></h5>
                     <p>Weight</p>
                 </div>
+
                 <div class="spec-item">
                     <h5>Zero</h5>
                     <p>Interference</p>
                 </div>
+
                 <div class="spec-item">
                     <h5>Direct</h5>
                     <p>Factory Source</p>
@@ -322,17 +661,16 @@
         </div>
     </section>
 
-    <!-- CONTACT SECTION -->
     <section id="contact">
         <div class="container">
             <div class="contact-box">
                 <h2 class="contact-title">START <span class="gradient-heading">NOW</span></h2>
-                <p style="color: #888; margin-bottom: 10px;">Ready to upgrade your operations?</p>
-                <p style="color: #666; font-size: 14px; margin-bottom: 30px;">Contact us for factory direct pricing and samples.</p>
-                
+                <p class="contact-sub">Ready to upgrade your operations?</p>
+                <p class="contact-sub-small">Contact us for factory direct pricing and samples.</p>
+
                 <div class="btn-group">
-                    <a href="https://wa.me/8801886298044" target="_blank" class="btn btn-whatsapp">📱 WhatsApp</a>
-                    <a href="mailto:yourgmail@gmail.com" class="btn btn-email">📧 Email Us</a>
+                    <a href="https://wa.me/8801886298044" target="_blank" class="btn btn-whatsapp">WhatsApp</a>
+                    <a href="mailto:mdshahinali21100@gmail.com" class="btn btn-email">Email Us</a>
                 </div>
             </div>
         </div>
