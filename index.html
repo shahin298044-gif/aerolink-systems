@@ -1,889 +1,1001 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AeroLink Systems | Direct Factory Partner</title>
-
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #000000;
-            color: #ffffff;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        .bg-visual {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -3;
-            background: radial-gradient(circle at 50% 50%, #050510 0%, #000000 100%);
-        }
-
-        .gradient-mesh {
-            position: absolute;
-            width: 200%;
-            height: 200%;
-            top: -50%;
-            left: -50%;
-            background:
-                radial-gradient(circle at 20% 30%, rgba(0, 123, 255, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 80% 70%, rgba(255, 0, 60, 0.10) 0%, transparent 40%),
-                radial-gradient(circle at 40% 80%, rgba(0, 243, 255, 0.10) 0%, transparent 30%);
-            animation: meshRotate 30s linear infinite;
-        }
-
-        @keyframes meshRotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .noise {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
-            pointer-events: none;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            position: relative;
-            z-index: 2;
-        }
-
-        h1, h2, h3, h4, h5 {
-            font-family: 'Orbitron', sans-serif;
-            letter-spacing: 1px;
-        }
-
-        .gradient-heading {
-            background: linear-gradient(90deg, #ffffff, #007BFF, #ff003c, #ffffff);
-            background-size: 300% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: textShine 5s linear infinite;
-            display: inline-block;
-        }
-
-        @keyframes textShine {
-            to { background-position: 200% center; }
-        }
-
-        .btn {
-            padding: 16px 34px;
-            font-family: 'Inter', sans-serif;
-            font-weight: 600;
-            font-size: 15px;
-            border-radius: 50px;
-            border: none;
-            cursor: pointer;
-            text-decoration: none;
-            transition: 0.3s ease;
-            display: inline-block;
-            text-align: center;
-        }
-
-        .btn-cta {
-            background: #007BFF;
-            color: #fff;
-            box-shadow: 0 0 20px rgba(0, 123, 255, 0.3);
-        }
-
-        .btn-cta:hover {
-            background: #fff;
-            color: #007BFF;
-        }
-
-        .btn-email {
-            background: transparent;
-            color: #fff;
-            border: 1px solid rgba(255,255,255,0.25);
-        }
-
-        .btn-email:hover {
-            background: #fff;
-            color: #000;
-        }
-
-        .btn-whatsapp {
-            background: #25D366;
-            color: #fff;
-        }
-
-        .btn-whatsapp:hover {
-            background: #fff;
-            color: #25D366;
-        }
-
-        header {
-            padding: 18px 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            background: rgba(0, 0, 0, 0.72);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .logo {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 24px;
-            font-weight: 700;
-            color: #fff;
-            text-decoration: none;
-            letter-spacing: 3px;
-        }
-
-        .logo span {
-            color: #007BFF;
-        }
-
-        .header-right {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-
-        .status-badge {
-            font-size: 10px;
-            color: #00ff9d;
-            background: rgba(0, 255, 157, 0.05);
-            padding: 8px 18px;
-            border: 1px solid rgba(0, 255, 157, 0.22);
-            border-radius: 30px;
-            font-family: 'Orbitron', sans-serif;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 0 20px rgba(0, 255, 157, 0.08);
-        }
-
-        .dot {
-            width: 6px;
-            height: 6px;
-            background: #00ff9d;
-            border-radius: 50%;
-            box-shadow: 0 0 10px #00ff9d;
-            animation: pulseDot 1.5s infinite ease-in-out;
-        }
-
-        @keyframes pulseDot {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.35); opacity: 0.65; }
-        }
-
-        .hero {
-            padding: 170px 0 90px;
-            text-align: center;
-            position: relative;
-        }
-
-        .hero-tag {
-            color: #8a8a8a;
-            font-size: 13px;
-            letter-spacing: 4px;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            font-weight: 600;
-        }
-
-        .hero h1 {
-            font-size: 72px;
-            font-weight: 900;
-            line-height: 1.05;
-            margin-bottom: 24px;
-        }
-
-        .hero-subtext {
-            font-size: 18px;
-            color: #aaaaaa;
-            max-width: 700px;
-            margin: 0 auto 34px;
-        }
-
-        .hero-visual {
-            margin-top: 45px;
-            position: relative;
-            width: 100%;
-            max-width: 1100px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .visual-glow {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 75%;
-            height: 75%;
-            background: radial-gradient(circle, rgba(0, 123, 255, 0.18), transparent 70%);
-            filter: blur(65px);
-            animation: pulseGlow 4s infinite;
-            z-index: 1;
-        }
-
-        @keyframes pulseGlow {
-            0%, 100% {
-                opacity: 0.35;
-                transform: translate(-50%, -50%) scale(1);
-            }
-            50% {
-                opacity: 0.70;
-                transform: translate(-50%, -50%) scale(1.08);
-            }
-        }
-
-        .gallery-shell {
-            position: relative;
-            z-index: 2;
-            overflow: hidden;
-            padding: 14px 0;
-            mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
-            -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
-        }
-
-        .gallery-track {
-            display: flex;
-            gap: 18px;
-            width: max-content;
-            animation: autoScroll 26s linear infinite;
-        }
-
-        .gallery-shell:hover .gallery-track {
-            animation-play-state: paused;
-        }
-
-        @keyframes autoScroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(calc(-50% - 9px)); }
-        }
-
-        .product-card,
-        .app-card {
-            position: relative;
-            width: 240px;
-            padding: 12px;
-            border-radius: 24px;
-            overflow: hidden;
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.08);
-            box-shadow: 0 20px 45px rgba(0,0,0,0.30);
-            flex: 0 0 auto;
-            transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
-        }
-
-        .product-card::before,
-        .app-card::before {
-            content: "";
-            position: absolute;
-            inset: -30%;
-            background:
-                conic-gradient(
-                    from 0deg,
-                    rgba(0,123,255,0.0),
-                    rgba(0,123,255,0.55),
-                    rgba(0,255,200,0.35),
-                    rgba(255,0,120,0.35),
-                    rgba(0,123,255,0.0)
-                );
-            animation: rotateGlow 5s linear infinite;
-            filter: blur(18px);
-            opacity: 0.85;
-            z-index: 0;
-        }
-
-        @keyframes rotateGlow {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .product-card:hover,
-        .app-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            border-color: rgba(0,123,255,0.30);
-            box-shadow: 0 28px 60px rgba(0,0,0,0.38), 0 0 28px rgba(0,123,255,0.14);
-        }
-
-        .card-inner {
-            position: relative;
-            z-index: 1;
-            background: rgba(8, 10, 22, 0.94);
-            border-radius: 18px;
-            overflow: hidden;
-            padding: 10px;
-        }
-
-        .product-img {
-            width: 100%;
-            height: 190px;
-            object-fit: contain;
-            display: block;
-            background: #10131d;
-            border-radius: 14px;
-            animation: floatProduct 4s ease-in-out infinite;
-        }
-
-        .product-card:nth-child(2) .product-img { animation-delay: 0.3s; }
-        .product-card:nth-child(3) .product-img { animation-delay: 0.6s; }
-        .product-card:nth-child(4) .product-img { animation-delay: 0.9s; }
-        .product-card:nth-child(5) .product-img { animation-delay: 1.2s; }
-        .product-card:nth-child(6) .product-img { animation-delay: 1.5s; }
-        .product-card:nth-child(7) .product-img { animation-delay: 1.8s; }
-        .product-card:nth-child(8) .product-img { animation-delay: 2.1s; }
-
-        @keyframes floatProduct {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .card-label {
-            margin-top: 10px;
-            text-align: center;
-            color: #d8d8d8;
-            font-size: 13px;
-            letter-spacing: 0.5px;
-        }
-
-        .trust-section {
-            padding: 90px 0;
-        }
-
-        .content-box {
-            background: rgba(10, 10, 10, 0.6);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 30px;
-            padding: 60px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.2);
-        }
-
-        .section-title {
-            font-size: 36px;
-            color: #fff;
-            margin-bottom: 24px;
-            font-weight: 700;
-            letter-spacing: -1px;
-            text-align: center;
-        }
-
-        .trust-text {
-            font-size: 18px;
-            color: #cccccc;
-            margin-bottom: 46px;
-            max-width: 840px;
-            margin-left: auto;
-            margin-right: auto;
-            text-align: center;
-        }
-
-        .highlight {
-            color: #007BFF;
-            font-weight: 700;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 24px;
-        }
-
-        .f-card {
-            padding: 32px;
-            background: rgba(0,0,0,0.4);
-            border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: 0.3s;
-            text-align: center;
-        }
-
-        .f-card:hover {
-            border-color: rgba(0, 123, 255, 0.3);
-            transform: translateY(-5px);
-            background: rgba(0, 123, 255, 0.05);
-        }
-
-        .f-card h4 {
-            font-size: 16px;
-            color: #fff;
-            margin-bottom: 14px;
-            letter-spacing: 1px;
-        }
-
-        .f-card p {
-            font-size: 15px;
-            color: #9a9a9a;
-            line-height: 1.6;
-        }
-
-        .specs-section {
-            padding: 80px 0;
-            background: rgba(0,0,0,0.42);
-        }
-
-        .specs-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-        }
-
-        .spec-item {
-            flex: 1 1 200px;
-            background: #0a0a0a;
-            padding: 25px;
-            border-radius: 15px;
-            border: 1px solid #111;
-            text-align: center;
-        }
-
-        .spec-item h5 {
-            color: #007BFF;
-            font-size: 28px;
-            margin-bottom: 5px;
-            font-weight: 700;
-        }
-
-        .spec-item p {
-            color: #666;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .applications-section {
-            padding: 30px 0 70px;
-        }
-
-        .applications-wrap {
-            max-width: 760px;
-            margin: 0 auto;
-        }
-
-        .app-card {
-            max-width: 760px;
-            margin: 0 auto;
-            padding: 12px;
-            width: 100%;
-        }
-
-        .app-image {
-            width: 100%;
-            max-height: 420px;
-            display: block;
-            border-radius: 18px;
-            object-fit: contain;
-            background: #10131d;
-        }
-
-        #contact {
-            padding: 90px 0;
-            text-align: center;
-        }
-
-        .contact-box {
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .contact-title {
-            font-size: 46px;
-            margin-bottom: 16px;
-            color: #fff;
-        }
-
-        .contact-sub {
-            color: #888;
-            margin-bottom: 8px;
-        }
-
-        .contact-sub-small {
-            color: #666;
-            font-size: 14px;
-            margin-bottom: 30px;
-        }
-
-        .btn-group {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 20px;
-        }
-
-        footer {
-            padding: 30px 0;
-            text-align: center;
-            color: #444;
-            font-size: 12px;
-            letter-spacing: 1px;
-            border-top: 1px solid #111;
-        }
-
-        @media (max-width: 768px) {
-            .hero {
-                padding: 135px 0 60px;
-            }
-
-            .hero h1 {
-                font-size: 40px;
-            }
-
-            .hero-subtext {
-                font-size: 16px;
-                margin-bottom: 28px;
-                padding: 0 8px;
-            }
-
-            .header-content {
-                padding: 0 4px;
-            }
-
-            .logo {
-                font-size: 18px;
-                letter-spacing: 2px;
-            }
-
-            .status-badge {
-                font-size: 8px;
-                padding: 6px 10px;
-                letter-spacing: 1px;
-            }
-
-            .btn-cta.header-btn {
-                padding: 9px 14px;
-                font-size: 11px;
-            }
-
-            .hero-visual {
-                max-width: 100%;
-                margin-top: 32px;
-            }
-
-            .gallery-track {
-                gap: 12px;
-                animation-duration: 18s;
-            }
-
-            .product-card {
-                width: 170px;
-                padding: 9px;
-                border-radius: 18px;
-            }
-
-            .card-inner {
-                border-radius: 14px;
-                padding: 8px;
-            }
-
-            .product-img {
-                height: 120px;
-                border-radius: 10px;
-            }
-
-            .card-label {
-                font-size: 12px;
-            }
-
-            .content-box {
-                padding: 36px 22px;
-            }
-
-            .section-title {
-                font-size: 28px;
-            }
-
-            .trust-text {
-                font-size: 16px;
-            }
-
-            .applications-section {
-                padding: 20px 0 50px;
-            }
-
-            .applications-wrap {
-                max-width: 100%;
-            }
-
-            .app-card {
-                max-width: 340px;
-                padding: 8px;
-                border-radius: 18px;
-            }
-
-            .app-image {
-                max-height: 220px;
-                border-radius: 12px;
-            }
-
-            .contact-title {
-                font-size: 32px;
-            }
-
-            .btn {
-                width: 100%;
-                display: block;
-            }
-
-            .btn-group {
-                flex-direction: column;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 32px;
-            }
-
-            .hero-tag {
-                font-size: 11px;
-                letter-spacing: 3px;
-            }
-
-            .product-card {
-                width: 145px;
-            }
-
-            .product-img {
-                height: 102px;
-            }
-
-            .gallery-track {
-                animation-duration: 16s;
-            }
-
-            .app-card {
-                max-width: 300px;
-                padding: 7px;
-            }
-
-            .app-image {
-                max-height: 190px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AeroLink Systems | Fiber Optic FPV Transmission Partner</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #020308;
+      --bg-soft: rgba(255,255,255,0.04);
+      --card: rgba(8, 10, 22, 0.92);
+      --line: rgba(255,255,255,0.08);
+      --text: #ffffff;
+      --muted: #a9afbe;
+      --blue: #0a84ff;
+      --cyan: #00d5ff;
+      --green: #1ee78a;
+      --pink: #ff2f7d;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    .bg-visual {
+      position: fixed;
+      inset: 0;
+      z-index: -4;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(0, 140, 255, 0.16), transparent 35%),
+        radial-gradient(circle at 80% 30%, rgba(255, 0, 102, 0.12), transparent 35%),
+        radial-gradient(circle at 50% 80%, rgba(0, 255, 204, 0.10), transparent 30%),
+        radial-gradient(circle at 50% 50%, #08101f 0%, #020308 70%);
+    }
+
+    .gradient-mesh {
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(0, 123, 255, 0.12) 0%, transparent 24%),
+        radial-gradient(circle at 75% 25%, rgba(0, 243, 255, 0.10) 0%, transparent 22%),
+        radial-gradient(circle at 80% 80%, rgba(255, 0, 90, 0.08) 0%, transparent 20%);
+      animation: rotateMesh 28s linear infinite;
+      filter: blur(12px);
+    }
+
+    @keyframes rotateMesh {
+      from { transform: rotate(0deg) scale(1); }
+      to { transform: rotate(360deg) scale(1.05); }
+    }
+
+    .noise {
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      pointer-events: none;
+      opacity: 0.05;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    }
+
+    .scan-lines {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.00) 50%, rgba(255,255,255,0.02) 100%);
+      background-size: 100% 6px;
+      opacity: 0.08;
+    }
+
+    .container {
+      width: min(1200px, calc(100% - 32px));
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    h1, h2, h3, h4, h5 {
+      font-family: 'Orbitron', sans-serif;
+      letter-spacing: 0.5px;
+    }
+
+    .gradient-heading {
+      background: linear-gradient(90deg, #ffffff, #7cc0ff, #00d5ff, #ff4d92, #ffffff);
+      background-size: 220% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: textShine 6s linear infinite;
+      display: inline-block;
+    }
+
+    @keyframes textShine {
+      to { background-position: 200% center; }
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(3, 5, 12, 0.72);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .header-content {
+      min-height: 76px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .logo {
+      text-decoration: none;
+      color: #fff;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: 3px;
+    }
+
+    .logo span {
+      color: var(--blue);
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .status-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(30,231,138,0.25);
+      background: rgba(30,231,138,0.06);
+      color: #9dffd0;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      box-shadow: 0 0 22px rgba(30,231,138,0.08);
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 10px var(--green);
+      animation: pulseDot 1.6s ease-in-out infinite;
+    }
+
+    @keyframes pulseDot {
+      0%,100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.45); opacity: 0.6; }
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 12px 24px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      border: 1px solid transparent;
+      transition: 0.28s ease;
+      cursor: pointer;
+    }
+
+    .btn-cta {
+      background: linear-gradient(135deg, #0a84ff, #0066ff);
+      color: #fff;
+      box-shadow: 0 0 22px rgba(10,132,255,0.22);
+    }
+
+    .btn-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(10,132,255,0.28);
+    }
+
+    .btn-dark {
+      background: rgba(255,255,255,0.02);
+      color: #fff;
+      border-color: rgba(255,255,255,0.12);
+    }
+
+    .btn-dark:hover {
+      background: rgba(255,255,255,0.08);
+      transform: translateY(-2px);
+    }
+
+    .btn-whatsapp {
+      background: #25D366;
+      color: #fff;
+    }
+
+    .btn-whatsapp:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(37,211,102,0.18);
+    }
+
+    .btn-email {
+      background: transparent;
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.16);
+    }
+
+    .btn-email:hover {
+      background: rgba(255,255,255,0.07);
+    }
+
+    .hero {
+      padding: 164px 0 84px;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero-tag {
+      color: #8f98ac;
+      font-size: 12px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+      font-weight: 600;
+    }
+
+    .hero h1 {
+      font-size: clamp(38px, 8vw, 82px);
+      line-height: 1.02;
+      margin-bottom: 22px;
+      font-weight: 900;
+    }
+
+    .hero-subtext {
+      max-width: 860px;
+      margin: 0 auto 34px;
+      color: var(--muted);
+      font-size: clamp(16px, 2vw, 19px);
+    }
+
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .trust-strip {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+
+    .trust-pill {
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+      color: #d5dbea;
+      font-size: 13px;
+    }
+
+    .hero-visual {
+      position: relative;
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .visual-glow {
+      position: absolute;
+      inset: 8% 12%;
+      background: radial-gradient(circle, rgba(10,132,255,0.18), transparent 65%);
+      filter: blur(70px);
+      z-index: 1;
+      animation: pulseGlow 4.6s ease-in-out infinite;
+    }
+
+    @keyframes pulseGlow {
+      0%,100% { transform: scale(1); opacity: 0.38; }
+      50% { transform: scale(1.08); opacity: 0.7; }
+    }
+
+    .gallery-shell {
+      position: relative;
+      z-index: 2;
+      overflow: hidden;
+      padding: 14px 0 8px;
+      mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    }
+
+    .gallery-track {
+      display: flex;
+      gap: 18px;
+      width: max-content;
+      animation: autoScroll 26s linear infinite;
+    }
+
+    .gallery-shell:hover .gallery-track {
+      animation-play-state: paused;
+    }
+
+    @keyframes autoScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(calc(-50% - 9px)); }
+    }
+
+    .product-card,
+    .app-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 22px 50px rgba(0,0,0,0.32);
+    }
+
+    .product-card {
+      width: 245px;
+      flex: 0 0 auto;
+      padding: 12px;
+    }
+
+    .product-card::before,
+    .app-card::before {
+      content: "";
+      position: absolute;
+      inset: -30%;
+      background:
+        conic-gradient(
+          from 0deg,
+          rgba(0,123,255,0.00),
+          rgba(0,123,255,0.58),
+          rgba(0,255,200,0.26),
+          rgba(255,0,120,0.24),
+          rgba(0,123,255,0.00)
+        );
+      filter: blur(20px);
+      animation: rotateGlow 6s linear infinite;
+      z-index: 0;
+      opacity: 0.85;
+    }
+
+    @keyframes rotateGlow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .product-card:hover,
+    .app-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      border-color: rgba(10,132,255,0.30);
+      box-shadow: 0 28px 60px rgba(0,0,0,0.38), 0 0 30px rgba(10,132,255,0.15);
+    }
+
+    .card-inner {
+      position: relative;
+      z-index: 1;
+      background: rgba(9, 12, 24, 0.95);
+      border-radius: 18px;
+      overflow: hidden;
+      padding: 10px;
+    }
+
+    .product-img {
+      width: 100%;
+      height: 188px;
+      display: block;
+      object-fit: contain;
+      background: #10131d;
+      border-radius: 14px;
+      animation: floatProduct 4.2s ease-in-out infinite;
+    }
+
+    .product-card:nth-child(2) .product-img { animation-delay: 0.3s; }
+    .product-card:nth-child(3) .product-img { animation-delay: 0.6s; }
+    .product-card:nth-child(4) .product-img { animation-delay: 0.9s; }
+    .product-card:nth-child(5) .product-img { animation-delay: 1.2s; }
+    .product-card:nth-child(6) .product-img { animation-delay: 1.5s; }
+    .product-card:nth-child(7) .product-img { animation-delay: 1.8s; }
+    .product-card:nth-child(8) .product-img { animation-delay: 2.1s; }
+
+    @keyframes floatProduct {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .card-label {
+      margin-top: 10px;
+      text-align: center;
+      color: #dbe2ef;
+      font-size: 13px;
+      letter-spacing: 0.3px;
+    }
+
+    .section {
+      padding: 88px 0;
+    }
+
+    .content-box {
+      background: rgba(10, 10, 16, 0.62);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 28px;
+      padding: 56px;
+      box-shadow: 0 30px 70px rgba(0,0,0,0.22);
+    }
+
+    .section-title {
+      font-size: clamp(28px, 4vw, 42px);
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .section-sub {
+      max-width: 860px;
+      text-align: center;
+      margin: 0 auto 44px;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .highlight {
+      color: var(--blue);
+      font-weight: 800;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 22px;
+    }
+
+    .f-card,
+    .spec-item,
+    .trust-mini {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 20px;
+      padding: 28px;
+      transition: 0.28s ease;
+    }
+
+    .f-card:hover,
+    .spec-item:hover,
+    .trust-mini:hover {
+      transform: translateY(-5px);
+      border-color: rgba(10,132,255,0.26);
+      background: rgba(10,132,255,0.05);
+    }
+
+    .f-card h4,
+    .trust-mini h4 {
+      font-size: 16px;
+      margin-bottom: 12px;
+      color: #fff;
+    }
+
+    .f-card p,
+    .trust-mini p {
+      font-size: 15px;
+      color: #a5adc1;
+    }
+
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 22px;
+      margin-top: 24px;
+    }
+
+    .specs-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 18px;
+    }
+
+    .spec-item {
+      text-align: center;
+    }
+
+    .spec-item h5 {
+      font-size: 30px;
+      color: var(--blue);
+      margin-bottom: 6px;
+    }
+
+    .spec-item p {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1.3px;
+      color: #7a8292;
+    }
+
+    .agent-note {
+      max-width: 920px;
+      margin: 0 auto 34px;
+      text-align: center;
+      color: #ccd3e0;
+      font-size: 17px;
+    }
+
+    .applications-wrap {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .app-card {
+      width: 100%;
+      padding: 12px;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .app-image {
+      width: 100%;
+      max-height: 420px;
+      object-fit: contain;
+      display: block;
+      border-radius: 18px;
+      background: #10131d;
+    }
+
+    #contact {
+      text-align: center;
+      padding: 88px 0;
+    }
+
+    .contact-box {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .contact-title {
+      font-size: clamp(30px, 4vw, 50px);
+      margin-bottom: 14px;
+    }
+
+    .contact-sub {
+      color: #9ea8b9;
+      margin-bottom: 8px;
+      font-size: 18px;
+    }
+
+    .contact-sub-small {
+      color: #70798c;
+      margin-bottom: 28px;
+    }
+
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    footer {
+      padding: 28px 0;
+      text-align: center;
+      color: #4e5666;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      font-size: 12px;
+      letter-spacing: 1px;
+    }
+
+    @media (max-width: 768px) {
+      .header-content {
+        min-height: 70px;
+      }
+
+      .logo {
+        font-size: 18px;
+        letter-spacing: 2px;
+      }
+
+      .status-badge {
+        font-size: 8px;
+        padding: 6px 10px;
+        letter-spacing: 1px;
+      }
+
+      .btn-cta.header-btn {
+        padding: 9px 14px;
+        font-size: 11px;
+        min-height: auto;
+      }
+
+      .hero {
+        padding: 136px 0 58px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+      }
+
+      .gallery-track {
+        gap: 12px;
+        animation-duration: 18s;
+      }
+
+      .product-card {
+        width: 172px;
+        padding: 9px;
+        border-radius: 18px;
+      }
+
+      .card-inner {
+        border-radius: 14px;
+        padding: 8px;
+      }
+
+      .product-img {
+        height: 120px;
+        border-radius: 10px;
+      }
+
+      .card-label {
+        font-size: 12px;
+      }
+
+      .content-box {
+        padding: 34px 20px;
+      }
+
+      .section-sub,
+      .agent-note,
+      .contact-sub {
+        font-size: 16px;
+      }
+
+      .app-card {
+        max-width: 340px;
+        padding: 8px;
+      }
+
+      .app-image {
+        max-height: 220px;
+        border-radius: 12px;
+      }
+
+      .btn-group {
+        flex-direction: column;
+      }
+
+      .btn-group .btn {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-tag {
+        font-size: 11px;
+        letter-spacing: 3px;
+      }
+
+      .product-card {
+        width: 146px;
+      }
+
+      .product-img {
+        height: 102px;
+      }
+
+      .gallery-track {
+        animation-duration: 16s;
+      }
+
+      .app-card {
+        max-width: 300px;
+        padding: 7px;
+      }
+
+      .app-image {
+        max-height: 190px;
+      }
+    }
+  </style>
 </head>
 <body>
+  <div class="bg-visual">
+    <div class="gradient-mesh"></div>
+  </div>
+  <div class="noise"></div>
+  <div class="scan-lines"></div>
 
-    <div class="bg-visual">
-        <div class="gradient-mesh"></div>
+  <header>
+    <div class="container header-content">
+      <a href="#" class="logo">AERO<span>LINK</span></a>
+
+      <div class="header-right">
+        <div class="status-badge">
+          <span class="dot"></span> System Online
+        </div>
+        <a href="#contact" class="btn btn-cta header-btn">Contact</a>
+      </div>
     </div>
-    <div class="noise"></div>
+  </header>
 
-    <header>
-        <div class="container header-content">
-            <a href="#" class="logo">AERO<span>LINK</span></a>
+  <section class="hero">
+    <div class="container">
+      <div class="hero-tag">PROFESSIONAL UAV FIBER OPTIC SOLUTIONS</div>
 
-            <div class="header-right">
-                <div class="status-badge">
-                    <span class="dot"></span> System Online
-                </div>
-                <a href="#contact" class="btn btn-cta header-btn">Contact</a>
+      <h1>
+        <span class="gradient-heading">FPV OPTICAL<br>TRANSMISSION</span>
+      </h1>
+
+      <p class="hero-subtext">
+        Premium fiber optic FPV transmission solution for professional drone operations. Built for long-distance, stable CVBS video and TTL/UART signal transmission in demanding environments where anti-interference performance, reliability, and technical support matter most.
+      </p>
+
+      <div class="trust-strip">
+        <div class="trust-pill">Factory-Connected Agent Support</div>
+        <div class="trust-pill">Sample Available</div>
+        <div class="trust-pill">Balanced Supply Support</div>
+        <div class="trust-pill">Technical Live Support</div>
+      </div>
+
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-cta">Request Samples</a>
+        <a href="#specs" class="btn btn-dark">View Technical Details</a>
+      </div>
+
+      <div class="hero-visual">
+        <div class="visual-glow"></div>
+
+        <div class="gallery-shell">
+          <div class="gallery-track">
+            <div class="product-card">
+              <div class="card-inner">
+                <img src="drone-photo.jpg.png" class="product-img" alt="Optical Module Front">
+                <div class="card-label">Optical Module Front</div>
+              </div>
             </div>
-        </div>
-    </header>
 
-    <section class="hero">
-        <div class="container">
-            <div class="hero-tag">PROFESSIONAL UAV COMPONENTS</div>
-
-            <h1>
-                <span class="gradient-heading">FPV OPTICAL<br>TRANSMISSION</span>
-            </h1>
-
-            <p class="hero-subtext">
-                Direct from China Factory. Professional grade hardware for industrial drone applications.
-            </p>
-
-            <div class="hero-visual">
-                <div class="visual-glow"></div>
-
-                <div class="gallery-shell">
-                    <div class="gallery-track">
-                        <div class="product-card">
-                            <div class="card-inner">
-                                <img src="drone-photo.jpg.png" class="product-img" alt="Optical Module Front">
-                                <div class="card-label">Optical Module Front</div>
-                            </div>
-                        </div>
-
-                        <div class="product-card">
-                            <div class="card-inner">
-                                <img src="image2.jpg.png" class="product-img" alt="Optical Module Detail">
-                                <div class="card-label">Optical Module Detail</div>
-                            </div>
-                        </div>
-
-                        <div class="product-card">
-                            <div class="card-inner">
-                                <img src="Picture3.png" class="product-img" alt="Connector Interface">
-                                <div class="card-label">Connector Interface</div>
-                            </div>
-                        </div>
-
-                        <div class="product-card">
-                            <div class="card-inner">
-                                <img src="Picture4.png" class="product-img" alt="Indicator Layout">
-                                <div class="card-label">Indicator Layout</div>
-                            </div>
-                        </div>
-
-                        <div class="product-card">
-                            <div class="card-inner">
-                                <img src="drone-photo.jpg.png" class="product-img" alt="Optical Module Front Copy">
-                                <div class="card-label">Optical Module Front</div>
-                            </div>
-                        </div>
-
-                        <div class="product-card">
-                            <div class="card-inner">
-                                <img src="image2.jpg.png" class="product-img" alt="Optical Module Detail Copy">
-                                <div class="card-label">Optical Module Detail</div>
-                            </div>
-                        </div>
-
-                        <div class="product-card">
-                            <div class="card-inner">
-                                <img src="Picture3.png" class="product-img" alt="Connector Interface Copy">
-                                <div class="card-label">Connector Interface</div>
-                            </div>
-                        </div>
-
-                        <div class="product-card">
-                            <div class="card-inner">
-                                <img src="Picture4.png" class="product-img" alt="Indicator Layout Copy">
-                                <div class="card-label">Indicator Layout</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="product-card">
+              <div class="card-inner">
+                <img src="image2.jpg.png" class="product-img" alt="Optical Module Detail">
+                <div class="card-label">Optical Module Detail</div>
+              </div>
             </div>
-        </div>
-    </section>
 
-    <section class="trust-section">
-        <div class="container">
-            <div class="content-box">
-                <h2 class="section-title">YOUR <span class="highlight">TRUSTED</span> PARTNER</h2>
-
-                <p class="trust-text">
-                    We have been working in the drone market for a long time. We do not just supply products; we connect you directly with the <span class="highlight">source</span>. We work directly with the factory in China, ensuring authentic quality, factory pricing, and reliable support for your business.
-                </p>
-
-                <div class="features-grid">
-                    <div class="f-card">
-                        <h4>LONG MARKET EXPERIENCE</h4>
-                        <p>Years of presence in the industry ensures we understand your technical needs better than anyone.</p>
-                    </div>
-
-                    <div class="f-card">
-                        <h4>DIRECT CHINA FACTORY</h4>
-                        <p>No middlemen. We deal directly with the manufacturing facilities to ensure genuine products.</p>
-                    </div>
-
-                    <div class="f-card">
-                        <h4>PROFESSIONAL USAGE</h4>
-                        <p>Ideal for companies requiring stable, long-range transmission for industrial and commercial operations.</p>
-                    </div>
-                </div>
+            <div class="product-card">
+              <div class="card-inner">
+                <img src="Picture3.png" class="product-img" alt="Connector Interface">
+                <div class="card-label">Connector Interface</div>
+              </div>
             </div>
-        </div>
-    </section>
 
-    <section class="specs-section">
-        <div class="container">
-            <h2 class="section-title">SYSTEM <span class="highlight">SPECS</span></h2>
-
-            <div class="specs-container">
-                <div class="spec-item">
-                    <h5>100<span style="font-size: 14px;">KM</span></h5>
-                    <p>Max Range</p>
-                </div>
-
-                <div class="spec-item">
-                    <h5>12<span style="font-size: 14px;">g</span></h5>
-                    <p>Weight</p>
-                </div>
-
-                <div class="spec-item">
-                    <h5>Zero</h5>
-                    <p>Interference</p>
-                </div>
-
-                <div class="spec-item">
-                    <h5>Direct</h5>
-                    <p>Factory Source</p>
-                </div>
+            <div class="product-card">
+              <div class="card-inner">
+                <img src="Picture4.png" class="product-img" alt="Indicator Layout">
+                <div class="card-label">Indicator Layout</div>
+              </div>
             </div>
-        </div>
-    </section>
 
-    <section class="applications-section">
-        <div class="container">
-            <div class="applications-wrap">
-                <h2 class="section-title">FIELD <span class="highlight">APPLICATIONS</span></h2>
-
-                <div class="app-card">
-                    <div class="card-inner">
-                        <img src="Picture5.png" class="app-image" alt="Applications Overview">
-                    </div>
-                </div>
+            <div class="product-card">
+              <div class="card-inner">
+                <img src="drone-photo.jpg.png" class="product-img" alt="Optical Module Front Copy">
+                <div class="card-label">Optical Module Front</div>
+              </div>
             </div>
-        </div>
-    </section>
 
-    <section id="contact">
-        <div class="container">
-            <div class="contact-box">
-                <h2 class="contact-title">START <span class="gradient-heading">NOW</span></h2>
-                <p class="contact-sub">Ready to upgrade your operations?</p>
-                <p class="contact-sub-small">Contact us for factory direct pricing and samples.</p>
-
-                <div class="btn-group">
-                    <a href="https://wa.me/8801886298044" target="_blank" class="btn btn-whatsapp">WhatsApp</a>
-                    <a href="mailto:mdshahinali21100@gmail.com" class="btn btn-email">Email Us</a>
-                </div>
+            <div class="product-card">
+              <div class="card-inner">
+                <img src="image2.jpg.png" class="product-img" alt="Optical Module Detail Copy">
+                <div class="card-label">Optical Module Detail</div>
+              </div>
             </div>
-        </div>
-    </section>
 
-    <footer>
-        <div class="container">
-            <p>© 2024 AEROLINK SYSTEMS. PROFESSIONAL UAV PARTNER.</p>
-        </div>
-    </footer>
+            <div class="product-card">
+              <div class="card-inner">
+                <img src="Picture3.png" class="product-img" alt="Connector Interface Copy">
+                <div class="card-label">Connector Interface</div>
+              </div>
+            </div>
 
+            <div class="product-card">
+              <div class="card-inner">
+                <img src="Picture4.png" class="product-img" alt="Indicator Layout Copy">
+                <div class="card-label">Indicator Layout</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="content-box">
+        <h2 class="section-title">POSITIONED AS YOUR <span class="highlight">TRUSTED FACTORY-LINKED AGENT</span></h2>
+        <p class="agent-note">
+          We work as a long-term professional sourcing and technical support bridge between clients and the manufacturing side in China. Our role is not only to introduce products, but to help buyers secure the right configuration, stable communication, dependable follow-up, and responsive technical coordination for real project needs.
+        </p>
+
+        <div class="trust-grid">
+          <div class="trust-mini">
+            <h4>LONG-TERM WORKING RELATIONSHIP</h4>
+            <p>Established coordination experience with the factory side helps ensure smoother communication, clearer requirements, and stronger delivery confidence.</p>
+          </div>
+
+          <div class="trust-mini">
+            <h4>HIGH-TRUST BUSINESS HANDLING</h4>
+            <p>Focused on serious buyers, project-based support, quality communication, and professional follow-through rather than one-time transactional selling.</p>
+          </div>
+
+          <div class="trust-mini">
+            <h4>BALANCED COMMERCIAL SUPPORT</h4>
+            <p>Support is structured for quality, stability, and long-term cooperation. Pricing is discussed privately based on needs, quantities, and configuration.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="content-box">
+        <h2 class="section-title">WHY PROFESSIONAL BUYERS <span class="highlight">WORK WITH US</span></h2>
+        <p class="section-sub">
+          The product supports synchronous CVBS video plus TTL/UART control transmission over single-mode fiber, with standard 20 km range and customizable long-distance versions, while keeping compact size, low weight, and strong anti-interference performance. :contentReference[oaicite:1]{index=1}
+        </p>
+
+        <div class="features-grid">
+          <div class="f-card">
+            <h4>ANTI-INTERFERENCE FIBER TRANSMISSION</h4>
+            <p>Designed for environments where electromagnetic interference can affect stable performance. Fiber communication helps maintain cleaner long-distance signal delivery. :contentReference[oaicite:2]{index=2}</p>
+          </div>
+
+          <div class="f-card">
+            <h4>SAMPLE AVAILABLE</h4>
+            <p>Suitable for evaluation before larger cooperation. This helps buyers test integration, wiring, and field behavior with more confidence.</p>
+          </div>
+
+          <div class="f-card">
+            <h4>CONFIGURATION FLEXIBILITY</h4>
+            <p>Signal type, interface standards, voltage range, and long-distance customization options can be discussed based on project requirements. :contentReference[oaicite:3]{index=3}</p>
+          </div>
+
+          <div class="f-card">
+            <h4>TECHNICAL LIVE SUPPORT</h4>
+            <p>Support is available for product selection, signal matching, basic integration questions, and factory-side coordination when projects require deeper clarification.</p>
+          </div>
+
+          <div class="f-card">
+            <h4>PROFESSIONAL APPLICATION FIT</h4>
+            <p>Well suited for drone racing, aerial imaging, industrial inspection, research, security monitoring, and other long-distance professional use cases. :contentReference[oaicite:4]{index=4}</p>
+          </div>
+
+          <div class="f-card">
+            <h4>PRICE KEPT PRIVATE</h4>
+            <p>To protect business positioning and quotation flexibility, pricing is not published on the page. Contact directly for quantity-based and project-based offers.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="specs">
+    <div class="container">
+      <h2 class="section-title">SYSTEM <span class="highlight">SPECIFICATIONS</span></h2>
+      <p class="section-sub">
+        Standard transmission distance is 20 km, with customizable options extending further. The module supports 5V–28V operating voltage, compact 50 × 29 × 13 mm size, about 12 g weight, and CVBS plus UART/TTL style communication support. :contentReference[oaicite:5]{index=5}
+      </p>
+
+      <div class="specs-container">
+        <div class="spec-item">
+          <h5>20KM+</h5>
+          <p>Standard Distance</p>
+        </div>
+
+        <div class="spec-item">
+          <h5>40–100KM</h5>
+          <p>Custom Support</p>
+        </div>
+
+        <div class="spec-item">
+          <h5>12g</h5>
+          <p>Compact Weight</p>
+        </div>
+
+        <div class="spec-item">
+          <h5>5V–28V</h5>
+          <p>Operating Voltage</p>
+        </div>
+
+        <div class="spec-item">
+          <h5>CVBS</h5>
+          <p>Video Signal</p>
+        </div>
+
+        <div class="spec-item">
+          <h5>TTL/UART</h5>
+          <p>Control Link</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="content-box">
+        <h2 class="section-title">PROJECT-LEVEL <span class="highlight">BUYER SUPPORT</span></h2>
+        <p class="section-sub">
+          We support technical discussion before ordering, sample-stage communication, factory-side follow-up, and long-term cooperation handling for buyers who want serious product sourcing rather than casual marketplace-style transactions.
+        </p>
+
+        <div class="features-grid">
+          <div class="f-card">
+            <h4>PRE-SALES MATCHING</h4>
+            <p>Discuss transmission distance, interface type, signal requirements, voltage expectations, and intended use-case before finalizing direction.</p>
+          </div>
+
+          <div class="f-card">
+            <h4>SAMPLE TO PROJECT FLOW</h4>
+            <p>Start with sample evaluation, then move into project-level or recurring supply discussion if performance meets your field expectations.</p>
+          </div>
+
+          <div class="f-card">
+            <h4>FACTORY COMMUNICATION BRIDGE</h4>
+            <p>Reduce confusion in cross-border product sourcing through direct requirement passing, clarification, and structured communication.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="applications-wrap">
+        <h2 class="section-title">FIELD <span class="highlight">APPLICATIONS</span></h2>
+        <p class="section-sub">
+          Typical scenarios include racing drones, professional aerial imaging, industrial inspection, long-distance security observation, and research environments that require dependable video and control transmission. :contentReference[oaicite:6]{index=6}
+        </p>
+
+        <div class="app-card">
+          <div class="card-inner">
+            <img src="Picture5.png" class="app-image" alt="Applications Overview">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <div class="contact-box">
+        <h2 class="contact-title">START <span class="gradient-heading">PROFESSIONAL COOPERATION</span></h2>
+        <p class="contact-sub">Samples, technical clarification, and business discussion are available.</p>
+        <p class="contact-sub-small">Share your target distance, application scenario, and quantity plan for a more accurate response.</p>
+
+        <div class="btn-group">
+          <a href="https://wa.me/8801886298044" target="_blank" class="btn btn-whatsapp">WhatsApp</a>
+          <a href="mailto:mdshahinali21100@gmail.com" class="btn btn-email">Email Us</a>
+          <a href="#specs" class="btn btn-dark">Technical Overview</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>© 2024 AEROLINK SYSTEMS. PROFESSIONAL FIBER OPTIC UAV TRANSMISSION SUPPORT.</p>
+    </div>
+  </footer>
 </body>
 </html>
