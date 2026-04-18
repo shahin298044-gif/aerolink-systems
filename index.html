@@ -232,7 +232,7 @@
             margin-top: 45px;
             position: relative;
             width: 100%;
-            max-width: 760px;
+            max-width: 980px;
             margin-left: auto;
             margin-right: auto;
         }
@@ -242,10 +242,10 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 72%;
-            height: 72%;
+            width: 75%;
+            height: 75%;
             background: radial-gradient(circle, rgba(0, 123, 255, 0.22), transparent 70%);
-            filter: blur(45px);
+            filter: blur(55px);
             animation: pulseGlow 4s infinite;
             z-index: 1;
         }
@@ -265,7 +265,7 @@
             position: relative;
             z-index: 2;
             display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
+            grid-template-columns: repeat(4, minmax(0, 1fr));
             gap: 18px;
             align-items: stretch;
             justify-items: center;
@@ -273,27 +273,33 @@
 
         .product-card {
             width: 100%;
-            max-width: 290px;
+            max-width: 220px;
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 22px;
-            padding: 14px;
+            padding: 12px;
             backdrop-filter: blur(10px);
             box-shadow: 0 20px 40px rgba(0,0,0,0.30);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(0, 123, 255, 0.28);
         }
 
         .product-img {
             width: 100%;
-            height: 230px;
+            height: 180px;
             object-fit: contain;
             display: block;
             border-radius: 16px;
             animation: floatProduct 4s ease-in-out infinite;
         }
 
-        .product-card:nth-child(2) .product-img {
-            animation-delay: 0.6s;
-        }
+        .product-card:nth-child(2) .product-img { animation-delay: 0.4s; }
+        .product-card:nth-child(3) .product-img { animation-delay: 0.8s; }
+        .product-card:nth-child(4) .product-img { animation-delay: 1.2s; }
 
         @keyframes floatProduct {
             0%, 100% { transform: translateY(0); }
@@ -450,6 +456,24 @@
             border-top: 1px solid #111;
         }
 
+        @media (max-width: 992px) {
+            .hero-visual {
+                max-width: 760px;
+            }
+
+            .product-gallery {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .product-card {
+                max-width: 260px;
+            }
+
+            .product-img {
+                height: 190px;
+            }
+        }
+
         @media (max-width: 768px) {
             .hero {
                 padding: 135px 0 60px;
@@ -490,6 +514,7 @@
             }
 
             .product-gallery {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
                 gap: 12px;
             }
 
@@ -500,7 +525,7 @@
             }
 
             .product-img {
-                height: 140px;
+                height: 135px;
                 border-radius: 12px;
             }
 
@@ -540,6 +565,10 @@
                 letter-spacing: 3px;
             }
 
+            .hero-visual {
+                max-width: 360px;
+            }
+
             .product-gallery {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
                 gap: 10px;
@@ -551,7 +580,7 @@
             }
 
             .product-img {
-                height: 115px;
+                height: 110px;
             }
         }
     </style>
@@ -598,6 +627,14 @@
 
                     <div class="product-card">
                         <img src="image2.jpg.png" class="product-img" alt="Product 2">
+                    </div>
+
+                    <div class="product-card">
+                        <img src="Picture3.png" class="product-img" alt="Product 3">
+                    </div>
+
+                    <div class="product-card">
+                        <img src="Picture4.png" class="product-img" alt="Product 4">
                     </div>
                 </div>
             </div>
