@@ -32,7 +32,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -2;
+            z-index: -3;
             background: radial-gradient(circle at 50% 50%, #050510 0%, #000000 100%);
         }
 
@@ -60,7 +60,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
+            z-index: -2;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
             pointer-events: none;
         }
@@ -244,7 +244,7 @@
             transform: translate(-50%, -50%);
             width: 75%;
             height: 75%;
-            background: radial-gradient(circle, rgba(0, 123, 255, 0.22), transparent 70%);
+            background: radial-gradient(circle, rgba(0, 123, 255, 0.20), transparent 70%);
             filter: blur(55px);
             animation: pulseGlow 4s infinite;
             z-index: 1;
@@ -256,7 +256,7 @@
                 transform: translate(-50%, -50%) scale(1);
             }
             50% {
-                opacity: 0.65;
+                opacity: 0.70;
                 transform: translate(-50%, -50%) scale(1.08);
             }
         }
@@ -271,21 +271,55 @@
             justify-items: center;
         }
 
-        .product-card {
+        .product-card,
+        .app-card {
             width: 100%;
-            max-width: 220px;
-            background: rgba(255, 255, 255, 0.04);
+            background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 22px;
             padding: 12px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.30);
-            transition: transform 0.3s ease, border-color 0.3s ease;
+            backdrop-filter: blur(12px);
+            box-shadow:
+                0 20px 40px rgba(0,0,0,0.30),
+                0 0 0 1px rgba(255,255,255,0.02) inset;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .product-card:hover {
+        .product-card::before,
+        .app-card::before {
+            content: "";
+            position: absolute;
+            inset: -1px;
+            border-radius: 22px;
+            background: linear-gradient(135deg, rgba(0,123,255,0.35), rgba(0,255,200,0.12), rgba(255,0,100,0.20));
+            opacity: 0.55;
+            filter: blur(18px);
+            z-index: 0;
+            animation: liveBorder 4s linear infinite;
+        }
+
+        @keyframes liveBorder {
+            0% { transform: rotate(0deg) scale(1.02); }
+            100% { transform: rotate(360deg) scale(1.02); }
+        }
+
+        .product-card:hover,
+        .app-card:hover {
             transform: translateY(-6px);
-            border-color: rgba(0, 123, 255, 0.28);
+            border-color: rgba(0, 123, 255, 0.30);
+            box-shadow:
+                0 25px 50px rgba(0,0,0,0.36),
+                0 0 24px rgba(0,123,255,0.16);
+        }
+
+        .card-inner {
+            position: relative;
+            z-index: 1;
+            background: rgba(7, 8, 18, 0.82);
+            border-radius: 16px;
+            overflow: hidden;
         }
 
         .product-img {
@@ -293,8 +327,8 @@
             height: 180px;
             object-fit: contain;
             display: block;
-            border-radius: 16px;
             animation: floatProduct 4s ease-in-out infinite;
+            background: #10131d;
         }
 
         .product-card:nth-child(2) .product-img { animation-delay: 0.4s; }
@@ -412,6 +446,29 @@
             letter-spacing: 1px;
         }
 
+        .applications-section {
+            padding: 40px 0 90px;
+        }
+
+        .applications-wrap {
+            max-width: 920px;
+            margin: 0 auto;
+        }
+
+        .app-card {
+            max-width: 920px;
+            margin: 0 auto;
+            padding: 14px;
+        }
+
+        .app-image {
+            width: 100%;
+            display: block;
+            border-radius: 18px;
+            object-fit: cover;
+            background: #10131d;
+        }
+
         #contact {
             padding: 100px 0;
             text-align: center;
@@ -524,9 +581,17 @@
                 border-radius: 16px;
             }
 
+            .product-card::before,
+            .app-card::before {
+                border-radius: 16px;
+            }
+
+            .card-inner {
+                border-radius: 12px;
+            }
+
             .product-img {
                 height: 135px;
-                border-radius: 12px;
             }
 
             .content-box {
@@ -552,6 +617,18 @@
 
             .btn-group {
                 flex-direction: column;
+            }
+
+            .applications-section {
+                padding: 20px 0 70px;
+            }
+
+            .app-card {
+                padding: 10px;
+            }
+
+            .app-image {
+                border-radius: 12px;
             }
         }
 
@@ -622,19 +699,27 @@
 
                 <div class="product-gallery">
                     <div class="product-card">
-                        <img src="drone-photo.jpg.png" class="product-img" alt="Product 1">
+                        <div class="card-inner">
+                            <img src="drone-photo.jpg.png" class="product-img" alt="Product 1">
+                        </div>
                     </div>
 
                     <div class="product-card">
-                        <img src="image2.jpg.png" class="product-img" alt="Product 2">
+                        <div class="card-inner">
+                            <img src="image2.jpg.png" class="product-img" alt="Product 2">
+                        </div>
                     </div>
 
                     <div class="product-card">
-                        <img src="Picture3.png" class="product-img" alt="Product 3">
+                        <div class="card-inner">
+                            <img src="Picture3.png" class="product-img" alt="Product 3">
+                        </div>
                     </div>
 
                     <div class="product-card">
-                        <img src="Picture4.png" class="product-img" alt="Product 4">
+                        <div class="card-inner">
+                            <img src="Picture4.png" class="product-img" alt="Product 4">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -693,6 +778,20 @@
                 <div class="spec-item">
                     <h5>Direct</h5>
                     <p>Factory Source</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="applications-section">
+        <div class="container">
+            <div class="applications-wrap">
+                <h2 class="section-title">FIELD <span class="highlight">APPLICATIONS</span></h2>
+
+                <div class="app-card">
+                    <div class="card-inner">
+                        <img src="Picture5.png" class="app-image" alt="Applications Overview">
+                    </div>
                 </div>
             </div>
         </div>
