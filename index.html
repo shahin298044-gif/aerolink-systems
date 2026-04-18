@@ -109,15 +109,72 @@
         .hero h1 { font-size: 72px; font-weight: 900; color: #fff; line-height: 1.1; margin-bottom: 30px; }
         
         /* Product Visual */
-        .hero-visual { margin-top: 60px; position: relative; display: inline-block; width: 100%; max-width: 700px; }
-        .visual-glow {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 80%; height: 80%; background: radial-gradient(circle, rgba(0, 123, 255, 0.2), transparent 70%); filter: blur(40px);
-            animation: pulseGlow 4s infinite;
-        }
-        @keyframes pulseGlow { 0%, 100% { opacity: 0.4; transform: translate(-50%, -50%) scale(1); } 50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.1); } }
-        
-        .product-img { width: 100%; position: relative; z-index: 2; border-radius: 20px; box-shadow: 0 30px 60px rgba(0,0,0,0.5); }
+        /* Product Visual */
+.hero-visual {
+    margin-top: 45px;
+    position: relative;
+    width: 100%;
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.visual-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    height: 70%;
+    background: radial-gradient(circle, rgba(0, 123, 255, 0.22), transparent 70%);
+    filter: blur(45px);
+    animation: pulseGlow 4s infinite;
+    z-index: 1;
+}
+
+@keyframes pulseGlow {
+    0%, 100% { opacity: 0.40; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 0.65; transform: translate(-50%, -50%) scale(1.08); }
+}
+
+.product-gallery {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    align-items: center;
+    justify-items: center;
+}
+
+.product-card {
+    width: 100%;
+    max-width: 290px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 22px;
+    padding: 14px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.30);
+}
+
+.product-img {
+    width: 100%;
+    height: 230px;
+    object-fit: contain;
+    display: block;
+    border-radius: 16px;
+    animation: floatProduct 4s ease-in-out infinite;
+}
+
+.product-card:nth-child(2) .product-img {
+    animation-delay: 0.6s;
+}
+
+@keyframes floatProduct {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
 
         /* ----- TRUST SECTION (Professional & Content Focused) ----- */
         .trust-section { padding: 100px 0; position: relative; }
